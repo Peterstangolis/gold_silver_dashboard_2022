@@ -2,6 +2,9 @@
 ## A function that takes in the ticker of a commodity and returns a number of relevant stats
 
 def ticker_numbers(ticker):
+    import yfinance as yf
+    import datetime
+
     ticker_data = yf.Ticker(ticker)
 
     date = datetime.datetime.today()

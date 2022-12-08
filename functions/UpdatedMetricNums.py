@@ -3,7 +3,18 @@
 ## A function that takes in a ticker along with the one day values for the ticker and returns a metric that incorporates
 ##  the latest price, the change in price from previousclose along with a line chart in the background
 
+#from functions.OneDayData import one_day_data
+from variables import one_day_period, fiveMinute_interval, candle_fall, candle_rise
+from functions.TickerNumbers import ticker_numbers
+
+import datetime
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+
 def updated_metric(ticker, title_name, line_color):
+    from functions.OneDayData import one_day_data
+
 
     lu, lp, data = one_day_data(period=one_day_period, interval=fiveMinute_interval, ticker=ticker)
 

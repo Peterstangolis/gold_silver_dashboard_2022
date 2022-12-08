@@ -2,6 +2,8 @@
 ## A function that retrieves the max time period available for a particular ticker
 
 def max_ticker_data(period, interval, ticker):
+    import yfinance as yf
+
     ticker_data = yf.Ticker(ticker)
 
     max_data_ticker_prices = ticker_data.history(period=period, interval=interval)
