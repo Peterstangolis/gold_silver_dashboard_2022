@@ -6,6 +6,7 @@ def news_headlines(ticker):
     import time
     import pytz
     from pytz import timezone
+    import yfinance as yf
 
     eastern = timezone('US/Eastern')
     fmt = '%b %d, %Y %#I:%M%p %Z'
