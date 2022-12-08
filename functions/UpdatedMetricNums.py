@@ -45,16 +45,20 @@ def updated_metric(ticker, title_name, line_color):
         x=data.index,
         y=data["Close"],
         line_color=line_color,
+        line_width=0.4,
         opacity=0.6))
 
     fig.update_xaxes(visible=False)
     fig.update_yaxes(visible=False)
-    fig.update_layout(template='plotly_white',
-                      width=400,
-                      height=600)
+    fig.update_layout(template='plotly_white')
 
     # fig.show()
     #fig.write_html(f"data/{title_name}_metric_price.html")
+
+    fig.update_layout(paper_bgcolor="#DCEDC8")
+    fig.update_layout(
+        margin=dict(l=30, r=30, t=10, b=10),
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -80,8 +84,14 @@ def fifty_two_high(ticker):
         delta_increasing=dict(color=candle_rise),
         delta_font=dict(size=22),
         title={
-            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>"}
+            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>"},
+    domain = {'x': [0, 0], 'y': [0, 0]}
     ))
+
+    fig.update_layout(paper_bgcolor="lightgray")
+    fig.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -108,6 +118,14 @@ def fifty_two_low(ticker):
             "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>"}
     ))
 
+
+    fig.update_layout(paper_bgcolor="#DCEEF2")
+    fig.update_layout(
+        margin=dict(l=30, r=30, t=10, b=10),
+    )
+
+
+
     st.plotly_chart(fig, use_container_width=True)
 
 def two_hundred_avg(ticker):
@@ -132,6 +150,11 @@ def two_hundred_avg(ticker):
         title={
             "text": "<span style='font-size:20px;color:#182033;'>200 DAY AVERAGE</span><br>"}
     ))
+
+    fig.update_layout(paper_bgcolor="#B6E7F2")
+    fig.update_layout(
+        margin=dict(l=30, r=30, t=5, b=5),
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
