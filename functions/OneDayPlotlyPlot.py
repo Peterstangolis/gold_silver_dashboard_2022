@@ -1,12 +1,18 @@
 
 ## A function that takes in data from a commodity for one day and returns a Plotly Candlestick plot
 
+from functions.OneDayData import one_day_data
+from variables import plotly_template
+
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+import streamlit as st
+
 def one_day_plotly_plot(increase_c, decrease_c, volume_c, template_p, period, interval, ticker):
     last_updated, last_price, one_day_prices = one_day_data(period=period, interval=interval, ticker=ticker)
 
-    fig_ticker = make_subplots(rows=2, cols=1, shared_xaxes=True,
-                               vertical_spacing=0.01,
-                               row_heights=[0.7, 0.3])
+    fig_ticker = make_subplots(rows=2, cols=1, shared_xaxes=True,vertical_spacing=0.01,row_heights=[0.7, 0.3])
 
     fig_ticker.add_trace(go.Candlestick(x=one_day_prices.index,
                                         open=one_day_prices["Open"],
@@ -97,6 +103,4 @@ def one_day_plotly_plot(increase_c, decrease_c, volume_c, template_p, period, in
                              template=plotly_template,
                              spikedistance=1000, hoverdistance=100)
 
-    fig_ticker.show()
-    fig_ticker.data = []
-    fig_ticker.layout = {}
+    st.plotly_chart(fig_ticker, use_container_width=True)

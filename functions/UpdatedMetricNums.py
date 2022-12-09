@@ -45,8 +45,8 @@ def updated_metric(ticker, title_name, line_color):
         x=data.index,
         y=data["Close"],
         line_color=line_color,
-        line_width=0.4,
-        opacity=0.6))
+        line_width=0.8,
+        opacity=0.8))
 
     fig.update_xaxes(visible=False)
     fig.update_yaxes(visible=False)
@@ -85,10 +85,18 @@ def fifty_two_high(ticker):
         delta_font=dict(size=22),
         title={
             "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>"},
-    domain = {'x': [0, 0], 'y': [0, 0]}
+
     ))
 
-    fig.update_layout(paper_bgcolor="lightgray")
+    fig.update_layout(paper_bgcolor="lightgray",
+                      font_family = 'Overpass',
+                      title={
+                          'y': 0.9,
+                          'x': 0.5,
+                          'xanchor': 'center',
+                          'yanchor': 'top',
+                          'font_family': 'Overpass'
+                      })
     fig.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
     )

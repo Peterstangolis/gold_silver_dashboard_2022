@@ -1,6 +1,7 @@
 
 ## Created functions
 from functions.UpdatedMetricNums import updated_metric, fifty_two_high, fifty_two_low, two_hundred_avg
+from functions.OneDayPlotlyPlot import one_day_plotly_plot
 from functions.NewsHeadlines import news_headlines
 from functions.TickerNumbers import ticker_numbers
 from variables import *
@@ -8,10 +9,10 @@ from variables import *
 
 
 import streamlit as st
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-import datetime
-import yfinance as yf
+# import plotly.graph_objects as go
+# from plotly.subplots import make_subplots
+# import datetime
+# import yfinance as yf
 
 
 ## Run the functions
@@ -61,6 +62,8 @@ with col5:
             st.markdown(f"{image_link}", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
+
+one_day_plotly_plot(increase_c=candle_rise , decrease_c=candle_fall, volume_c=volume_gold, template_p = plotly_template, period = one_day_interval, interval = fifteenMinute_interval, ticker = gold)
 
 
 
