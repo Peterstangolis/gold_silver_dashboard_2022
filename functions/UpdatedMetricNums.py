@@ -83,20 +83,20 @@ def fifty_two_high(ticker):
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
         delta_font=dict(size=22),
-        title={
-            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>"},
-
     ))
 
-    fig.update_layout(paper_bgcolor="lightgray",
-                      font_family = 'Overpass',
-                      title={
-                          'y': 0.9,
-                          'x': 0.5,
-                          'xanchor': 'center',
-                          'yanchor': 'top',
-                          'font_family': 'Overpass'
-                      })
+    fig.update_layout(
+                paper_bgcolor="#DCEEF2",
+                font_family='Overpass',
+                title={
+                    "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>",
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font_family': 'Overpass'
+    })
+
     fig.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
     )
@@ -121,15 +121,22 @@ def fifty_two_low(ticker):
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
-        delta_font=dict(size=22),
-        title={
-            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>"}
+        delta_font=dict(size=22)
     ))
 
 
     fig.update_layout(paper_bgcolor="#DCEEF2")
     fig.update_layout(
-        margin=dict(l=30, r=30, t=10, b=10),
+        margin=dict(l=10, r=10, t=10, b=10),
+        paper_bgcolor="lightgray",
+        font_family='Overpass',
+        title={
+            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>",
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font_family': 'Overpass'
     )
 
 
@@ -159,9 +166,17 @@ def two_hundred_avg(ticker):
             "text": "<span style='font-size:20px;color:#182033;'>200 DAY AVERAGE</span><br>"}
     ))
 
-    fig.update_layout(paper_bgcolor="#B6E7F2")
+    fig.update_layout(paper_bgcolor="#DCEEF2")
     fig.update_layout(
-        margin=dict(l=30, r=30, t=5, b=5),
+        margin=dict(l=10, r=10, t=10, b=10),
+        font_family='Overpass',
+        title={
+            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>",
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font_family': 'Overpass'
     )
 
     st.plotly_chart(fig, use_container_width=True)
