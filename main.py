@@ -1,3 +1,4 @@
+import datetime
 
 ## Created functions
 from functions.UpdatedMetricNums import updated_metric, fifty_two_high, fifty_two_low, two_hundred_avg
@@ -22,6 +23,8 @@ import streamlit as st
 st.set_page_config(layout="wide", page_title="GOLD & SILVER PRICES", page_icon="random")
 
 st.title("TESTING")
+
+st.markdown(f"LAST UPDATE: {datetime.datetime.today():%A %b %#d, %Y %H:%M}", unsafe_allow_html=True)
 
 col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 2], gap = 'small')
 

@@ -3,11 +3,11 @@
 
 def ticker_numbers(ticker):
     import yfinance as yf
-    import datetime
+    #import datetime
 
     ticker_data = yf.Ticker(ticker)
 
-    date = datetime.datetime.today()
+    #date = datetime.datetime.today()
 
     fifty_two_HIGH = ticker_data.info["fiftyTwoWeekHigh"]
     fifty_two_LOW = ticker_data.info["fiftyTwoWeekLow"]
@@ -17,4 +17,4 @@ def ticker_numbers(ticker):
     price_change = reg_MARKET - prev_CLOSE
     perc_change = round((price_change / prev_CLOSE) * 100, 3)
 
-    return fifty_two_HIGH, fifty_two_LOW, two_hundred_AVG, prev_CLOSE, reg_MARKET, price_change, perc_change, date
+    return fifty_two_HIGH, fifty_two_LOW, two_hundred_AVG, prev_CLOSE, reg_MARKET, price_change, perc_change

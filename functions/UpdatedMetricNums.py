@@ -22,7 +22,7 @@ def updated_metric(ticker, title_name, line_color):
 
 
     fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
-    reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=ticker)
+    reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
 
     fig = go.Figure()
 
@@ -33,7 +33,7 @@ def updated_metric(ticker, title_name, line_color):
         number_font=dict(size=70, color='#182033'),
         delta={"reference": previous_CLOSE, "valueformat": ".3f", 'relative': False,
                "suffix": f" ({percent_change:.2f}%)"},
-        # domain = {'x':[1, 1], 'y':[0.5,0]},
+        domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
         delta_font=dict(size=24),
@@ -44,7 +44,8 @@ def updated_metric(ticker, title_name, line_color):
         y=data["Close"],
         line_color=line_color,
         line_width=0.8,
-        opacity=0.8))
+        opacity=0.8
+    ))
 
     fig.update_xaxes(visible=False)
     fig.update_yaxes(visible=False)
@@ -54,10 +55,10 @@ def updated_metric(ticker, title_name, line_color):
     #fig.write_html(f"data/{title_name}_metric_price.html")
 
     fig.update_layout(
-        plot_bgcolor="#FEE79F",
+        plot_bgcolor="#FFF6E3",
         paper_bgcolor = "#DCEEF2",
         title={
-            "text": f"<span style='font-size:30px;color:{line_color};'>{title_name}</span><br><span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>",
+            "text": f"<span style='font-size:30px;color:{line_color};font-weight:bold;'>{title_name}</span><br>",#<span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>",
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
@@ -65,13 +66,16 @@ def updated_metric(ticker, title_name, line_color):
             'font_family': 'Overpass'
     }
     )
+    fig.update_layout(
+        margin=dict(l=5, r=5, t=5, b=5),
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
 
 def fifty_two_high(ticker):
     fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
-    reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=ticker)
+    reg_MARKET, price_change, percent_change= ticker_numbers(ticker=ticker)
 
     p_change = ((fifty_two_week_HIGH - previous_CLOSE)/fifty_two_week_HIGH)*100
 
@@ -111,7 +115,7 @@ def fifty_two_high(ticker):
 
 def fifty_two_low(ticker):
     fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
-    reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=ticker)
+    reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
 
     p_change = ((fifty_two_week_LOW - previous_CLOSE) / fifty_two_week_HIGH) * 100
 
@@ -151,7 +155,7 @@ def fifty_two_low(ticker):
 
 def two_hundred_avg(ticker):
     fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
-    reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=ticker)
+    reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
 
     p_change = ((two_hundred_day_AVG - previous_CLOSE) / fifty_two_week_HIGH) * 100
 
