@@ -29,18 +29,14 @@ col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 2], gap = 'small')
 #     reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=gold)
 
 with col1:
-    st.write(f"{title_gold} {gold}")
     updated_metric(ticker=gold, title_name=title_gold, line_color=volume_gold)
 with col2:
-    st.write("52 Week High")
     fifty_two_high(ticker=gold)
 
 with col3:
-    st.write("52 Week Low")
     fifty_two_low(ticker=gold)
 
 with col4:
-    st.write("200 Day Average")
     two_hundred_avg(ticker=gold)
 
 with col5:

@@ -37,8 +37,6 @@ def updated_metric(ticker, title_name, line_color):
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
         delta_font=dict(size=24),
-        title={
-            "text": f"<span style='font-size:30px;color:#182033;'>{title_name} ({ticker})</span><br><span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>"}
     ))
 
     fig.add_trace(go.Scatter(
@@ -55,9 +53,17 @@ def updated_metric(ticker, title_name, line_color):
     # fig.show()
     #fig.write_html(f"data/{title_name}_metric_price.html")
 
-    fig.update_layout(paper_bgcolor="#DCEDC8")
     fig.update_layout(
-        margin=dict(l=30, r=30, t=10, b=10),
+        plot_bgcolor="#FEE79F",
+        paper_bgcolor = "#DCEEF2",
+        title={
+            "text": f"<span style='font-size:30px;color:{line_color};'>{title_name}</span><br><span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>",
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font_family': 'Overpass'
+    }
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -86,7 +92,7 @@ def fifty_two_high(ticker):
     ))
 
     fig.update_layout(
-                paper_bgcolor="#DCEEF2",
+                paper_bgcolor="#E5FFEE",
                 font_family='Overpass',
                 title={
                     "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>",
@@ -98,7 +104,7 @@ def fifty_two_high(ticker):
     })
 
     fig.update_layout(
-        margin=dict(l=20, r=20, t=20, b=20),
+        margin=dict(l=5, r=5, t=5, b=5),
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -128,7 +134,7 @@ def fifty_two_low(ticker):
     fig.update_layout(paper_bgcolor="#DCEEF2")
     fig.update_layout(
         margin=dict(l=10, r=10, t=10, b=10),
-        paper_bgcolor="lightgray",
+        paper_bgcolor="#FFE1DE",
         font_family='Overpass',
         title={
             "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>",
@@ -136,7 +142,7 @@ def fifty_two_low(ticker):
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font_family': 'Overpass'
+            'font_family': 'Overpass'}
     )
 
 
@@ -162,8 +168,6 @@ def two_hundred_avg(ticker):
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
         delta_font=dict(size=22),
-        title={
-            "text": "<span style='font-size:20px;color:#182033;'>200 DAY AVERAGE</span><br>"}
     ))
 
     fig.update_layout(paper_bgcolor="#DCEEF2")
@@ -171,12 +175,12 @@ def two_hundred_avg(ticker):
         margin=dict(l=10, r=10, t=10, b=10),
         font_family='Overpass',
         title={
-            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>",
+            "text": "<span style='font-size:20px;color:#182033;'>200 DAY AVERAGE</span><br>",
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
-            'font_family': 'Overpass'
+            'font_family': 'Overpass'}
     )
 
     st.plotly_chart(fig, use_container_width=True)
