@@ -3,11 +3,10 @@
 
 def ticker_numbers(ticker):
     import yfinance as yf
-    #import datetime
+    import json
 
     ticker_data = yf.Ticker(ticker)
 
-    #date = datetime.datetime.today()
 
     fifty_two_HIGH = ticker_data.info["fiftyTwoWeekHigh"]
     fifty_two_LOW = ticker_data.info["fiftyTwoWeekLow"]
@@ -17,4 +16,20 @@ def ticker_numbers(ticker):
     price_change = reg_MARKET - prev_CLOSE
     perc_change = round((price_change / prev_CLOSE) * 100, 3)
 
-    return fifty_two_HIGH, fifty_two_LOW, two_hundred_AVG, prev_CLOSE, reg_MARKET, price_change, perc_change
+    updated_numbers = {
+        'fifty_two_HIGH' : fifty_two_HIGH,
+        "fifty_two_LOW:" : fifty_two_LOW,
+        "two_hundred_AVG" : two_hundred_AVG,
+        "prev_CLOSE" : prev_CLOSE,
+        "reg_MARKET" : reg_MARKET,
+        "price_change": price_change,
+        "perc_change" : perc_change
+    }
+
+    with open("data/updated_numbers.json", "w") as outfile:
+        json.dump(updated_numbers, outfile)
+
+    #json_object = json.dumps(updated_numbers, indent=4)
+
+
+    #return fifty_two_HIGH, fifty_two_LOW, two_hundred_AVG, prev_CLOSE, reg_MARKET, price_change, perc_change

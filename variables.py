@@ -9,6 +9,13 @@ TSX = "^GSPTSE"
 
 title_silver = "SILVER"
 title_gold = "GOLD"
+title_tsx = "TSX"
+
+commodities = {
+    title_gold:gold,
+    title_silver:silver,
+    title_tsx:TSX
+}
 
 
 one_day_period = '1d'
