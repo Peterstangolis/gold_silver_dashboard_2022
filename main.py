@@ -16,7 +16,9 @@ import datetime
 
 
 # SETTING PAGE CONFIG TO WIDE MODE AND ADDING A TITLE AND FAVICON
-st.set_page_config(layout="wide", page_title="GOLD & SILVER PRICES", page_icon="random")
+st.set_page_config(layout="wide",
+                   page_title="GOLD & SILVER PRICES",
+                   page_icon="🪙")
 
 if "ticket_selected" not in st.session_state:
     st.session_state.ticket_selected = gold

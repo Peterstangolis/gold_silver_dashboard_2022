@@ -89,7 +89,7 @@ def fifty_two_high(ticker):
         contents = file.read()
     parsed_contents = json.loads(contents)
 
-    p_change = ((parsed_contents['fifty_two_HIGH'] - parsed_contents['prev_CLOSE'])/parsed_contents['fifty_two_HIGH'])*100
+    p_change = ((parsed_contents['fifty_two_HIGH'] - parsed_contents['reg_MARKET'])/parsed_contents['fifty_two_HIGH'])*100
 
 
     fig = go.Figure()
@@ -99,7 +99,7 @@ def fifty_two_high(ticker):
         value=parsed_contents['fifty_two_HIGH'],
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
-        delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': True, 'position': 'bottom',
+        delta={"reference": parsed_contents['reg_MARKET'], "valueformat":".2f", 'relative': False, 'position': 'bottom',
                "suffix": f"({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
@@ -120,7 +120,7 @@ def fifty_two_high(ticker):
     })
 
     fig.update_layout(
-        margin=dict(l=5, r=5, t=5, b=5),
+        margin=dict(l=10, r=10, t=10, b=10),
     )
 
     st.plotly_chart(fig, use_container_width=True)
