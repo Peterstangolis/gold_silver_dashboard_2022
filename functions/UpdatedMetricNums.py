@@ -29,10 +29,6 @@ def updated_metric(ticker, title_name, line_color):
 
     lu, lp, data = one_day_data(period=one_day_period, interval=fiveMinute_interval, ticker=ticker)
 
-
-    #fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
-    #reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
-
     fig = go.Figure()
 
     fig.add_trace(go.Indicator(
@@ -103,8 +99,8 @@ def fifty_two_high(ticker):
         value=parsed_contents['fifty_two_HIGH'],
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
-        delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': True, 'position': 'top',
-               "suffix": f"<br>({p_change:.2f}%)"},
+        delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': True, 'position': 'bottom',
+               "suffix": f"({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
@@ -150,7 +146,7 @@ def fifty_two_low(ticker):
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
         delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': False,
-               "suffix": f"<br> ({p_change:.2f}%)"},
+               "suffix": f"({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
@@ -195,7 +191,7 @@ def two_hundred_avg(ticker):
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
         delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': False,
-               "suffix": f"<br> ({p_change:.2f}%)"},
+               "suffix": f"({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
@@ -204,7 +200,7 @@ def two_hundred_avg(ticker):
 
     fig.update_layout(paper_bgcolor="#DCEEF2")
     fig.update_layout(
-        margin=dict(l=10, r=10, t=20, b=20),
+        margin=dict(l=10, r=10, t=10, b=10),
         font_family='Overpass',
         title={
             "text": "<span style='font-size:20px;color:#182033;'>200 DAY AVERAGE</span><br>",

@@ -26,8 +26,6 @@ st.set_page_config(layout="wide", page_title="GOLD & SILVER PRICES", page_icon="
 if "ticket_selected" not in st.session_state:
     st.session_state.ticket_selected = gold
 
-print(commodities.keys())
-print(commodities.values())
 
 with st.sidebar:
     with st.form(key="submit_selection"):
@@ -47,24 +45,28 @@ if submitted:
 
     st.markdown(f"LAST UPDATE: {datetime.datetime.today():%A %b %#d, %Y %H:%M}", unsafe_allow_html=True)
 
-    col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 2], gap = 'small')
+    col1, col2, col3, col4, col5 = st.columns([2, 1.5, 1.5, 1.5, 1], gap = 'small')
 
     # fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
     #     reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=gold)
 
     with col1:
-        updated_metric(ticker=gold, title_name=title_gold, line_color=volume_gold)
+        updated_metric(ticker=st.session_state.ticket_selected, title_name=chart_colours_title[st.session_state.ticket_selected][0],
+                       line_color=chart_colours_title[st.session_state.ticket_selected][1])
     with col2:
-        fifty_two_high(ticker=gold)
+        fifty_two_high(ticker=st.session_state.ticket_selected)
 
     with col3:
-        fifty_two_low(ticker=gold)
+        fifty_two_low(ticker=st.session_state.ticket_selected)
 
     with col4:
-        two_hundred_avg(ticker=gold)
+        two_hundred_avg(ticker=st.session_state.ticket_selected)
 
     with col5:
-        news = news_headlines(ticker=gold)
+        st.write(" ")
+
+    with st.sidebar:
+        news = news_headlines(ticker=st.session_state.ticket_selected)
         headline_keys = list(news.keys())
         st.write("NEWS")
         #st.write(news)
@@ -83,10 +85,11 @@ if submitted:
             st.markdown("<br>", unsafe_allow_html=True)
 
 
-    one_day_plotly_plot(increase_c=candle_rise , decrease_c=candle_fall, volume_c=volume_gold, template_p = plotly_template, period = one_day_interval, interval = fifteenMinute_interval, ticker = gold)
+    one_day_plotly_plot(increase_c=candle_rise , decrease_c=candle_fall, volume_c=chart_colours_title[st.session_state.ticket_selected][1], template_p = plotly_template,
+                        period = one_day_interval, interval = fifteenMinute_interval, ticker = st.session_state.ticket_selected)
 
 else:
-    st.image("https://images.pexels.com/photos/8369648/pexels-photo-8369648.jpeg")
+    st.image("https://images.pexels.com/photos/8369648/pexels-photo-8369648.jpeg", width=600)
 
 
 
