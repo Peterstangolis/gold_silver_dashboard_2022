@@ -1,20 +1,15 @@
-import datetime
+
 
 ## Created functions
 from functions.UpdatedMetricNums import updated_metric, fifty_two_high, fifty_two_low, two_hundred_avg
 from functions.OneDayPlotlyPlot import one_day_plotly_plot
+from functions.MaxPlotlyPlot import max_plotly_plot
 from functions.NewsHeadlines import news_headlines
 from functions.TickerNumbers import ticker_numbers
 from variables import *
 
-
-
-
 import streamlit as st
-# import plotly.graph_objects as go
-# from plotly.subplots import make_subplots
-# import datetime
-# import yfinance as yf
+import datetime
 
 
 ## Run the functions
@@ -26,10 +21,14 @@ st.set_page_config(layout="wide", page_title="GOLD & SILVER PRICES", page_icon="
 if "ticket_selected" not in st.session_state:
     st.session_state.ticket_selected = gold
 
+if "chart_type" not in st.session_state:
+    st.session_state.chart_type = "ONE DAY"
+
 
 with st.sidebar:
     with st.form(key="submit_selection"):
         st.selectbox("SELECT TICKER SYMBOL", list(commodities.values()), index=0, key="ticket_selected")
+        st.radio('SELECT CHART TYPE', ["ONE DAY", "HISTORY"], horizontal=True, key="chart_type")
         submitted = st.form_submit_button(label="Submit")
 
     st.write(submitted)
@@ -64,15 +63,33 @@ if submitted:
     with col5:
         st.write(" ")
 
+    if st.session_state.chart_type == "ONE DAY":
+        one_day_plotly_plot(increase_c=candle_rise, decrease_c=candle_fall,
+                            volume_c=chart_colours_title[st.session_state.ticket_selected][1], template_p=plotly_template,
+                            period=one_day_interval, interval=fifteenMinute_interval,
+                            ticker=st.session_state.ticket_selected)
+
+    elif st.session_state.chart_type == "HISTORY":
+        max_plotly_plot(increase_c=candle_rise,
+                        decrease_c=candle_fall,
+                        volume_c=chart_colours_title[st.session_state.ticket_selected][1],
+                        fill_color=chart_colours_title[st.session_state.ticket_selected][2],
+                        template_p='plotly_white',
+                        period=max_period,
+                        interval=one_day_period,
+                        ticker=st.session_state.ticket_selected
+                        )
+
     with st.sidebar:
         news = news_headlines(ticker=st.session_state.ticket_selected)
         headline_keys = list(news.keys())
         st.markdown("<hr>", unsafe_allow_html=True)
-        st.write(f"<span style = 'font-size:20px;font-family:liberation serif;color:{chart_colours_title[st.session_state.ticket_selected][1]}'>LATEST HEADLINES FOR {chart_colours_title[st.session_state.ticket_selected][0]}</span>", unsafe_allow_html=True)
+        st.write(f"<span style = 'font-weight:bold;font-size:20px;font-family:liberation serif;color:{chart_colours_title[st.session_state.ticket_selected][1]}'>LATEST HEADLINES FOR {chart_colours_title[st.session_state.ticket_selected][0]}</span>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
 
         for i in range(len(headline_keys)):
             key = headline_keys[i]
-            st.write(f"<p style = 'font-size:18px;font-family:liberation serif;color:black;'>{news[key][0]}</p>", unsafe_allow_html=True)
+            st.write(f"<p style = 'font-size:18px;font-family:liberation serif;color:{chart_colours_title[st.session_state.ticket_selected][3]};'>{news[key][0]}</p>", unsafe_allow_html=True)
             st.markdown(f"<span style = 'color:#0076A9;font-size:12px;'> {news[key][2]} </span> <span style = 'color:{chart_colours_title[st.session_state.ticket_selected][1]};font-size:13px;'> | {news[key][4]} </span> ", unsafe_allow_html=True)
             if len(news[key][3]) > 2:
                 #st.image(f'{headlines[key][3]}', width=100)
@@ -85,8 +102,6 @@ if submitted:
             st.markdown("<br>", unsafe_allow_html=True)
 
 
-    one_day_plotly_plot(increase_c=candle_rise , decrease_c=candle_fall, volume_c=chart_colours_title[st.session_state.ticket_selected][1], template_p = plotly_template,
-                        period = one_day_interval, interval = fifteenMinute_interval, ticker = st.session_state.ticket_selected)
 
 else:
     st.image("https://images.pexels.com/photos/8369648/pexels-photo-8369648.jpeg", width=600)

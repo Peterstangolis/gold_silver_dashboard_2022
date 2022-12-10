@@ -1,10 +1,16 @@
 
 ## A function that takes in the max data available for a commodity and returns a plotly line chart
+from functions.MaxTickerData import max_ticker_data
+
+import plotly.graph_objects as go
+import streamlit as st
+
 
 def max_plotly_plot(increase_c, decrease_c, volume_c, fill_color, template_p, period, interval, ticker):
 
-    last_updated, last_price, max_prices = max_ticker_data(period=period, interval=interval, ticker=ticker)
+    import streamlit as st
 
+    last_updated, last_price, max_prices = max_ticker_data(period=period, interval=interval, ticker=ticker)
 
     trace1 = go.Scatter(
         name='Close',
@@ -19,7 +25,7 @@ def max_plotly_plot(increase_c, decrease_c, volume_c, fill_color, template_p, pe
 
     layout = go.Layout(
         yaxis=dict(title='Price'),
-        title=f'{ticker} Volatility Visualization',
+        #title=f'{ticker} Volatility Visualization',
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
@@ -43,7 +49,7 @@ def max_plotly_plot(increase_c, decrease_c, volume_c, fill_color, template_p, pe
         showlegend=False,
         height=600,
         width=1000,
-        template=plotly_template
+        template=template_p
     )
 
     fig_ticker = go.Figure(data=data, layout=layout)
@@ -58,7 +64,7 @@ def max_plotly_plot(increase_c, decrease_c, volume_c, fill_color, template_p, pe
 
     fig_ticker.add_annotation(xref="paper",
                               yref="y",
-                              x=1.08,
+                              x=1.05,
                               y=f"{last_price:.3f}",
                               text=f"<b>{last_price:.3f}",
                               showarrow=False,
@@ -91,6 +97,8 @@ def max_plotly_plot(increase_c, decrease_c, volume_c, fill_color, template_p, pe
                               opacity=0.9
                               )
 
-    fig_ticker.show()
-    fig_ticker.data = []
-    fig_ticker.layout = {}
+    fig_ticker.update_layout(
+        margin=dict(l=10, r=10, t=10, b=10)
+    )
+
+    st.plotly_chart(fig_ticker, use_container_width=True)
