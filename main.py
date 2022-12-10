@@ -44,15 +44,17 @@ if submitted:
 
     st.markdown(f"LAST UPDATE: {datetime.datetime.today():%A %b %#d, %Y %H:%M}", unsafe_allow_html=True)
 
-    col1, col2, col3, col4, col5 = st.columns([2, 1.5, 1.5, 1.5, 1], gap = 'small')
+    col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5], gap = 'small')
 
     # fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
     #     reg_MARKET, price_change, percent_change, updated_date = ticker_numbers(ticker=gold)
 
+    ## TOP 4 COLUMNS OF DATA
     with col1:
         updated_metric(ticker=st.session_state.ticket_selected, title_name=chart_colours_title[st.session_state.ticket_selected][0],
                        line_color=chart_colours_title[st.session_state.ticket_selected][1],
                        fill_color=chart_colours_title[st.session_state.ticket_selected][2])
+
     with col2:
         fifty_two_high(ticker=st.session_state.ticket_selected)
 
@@ -62,8 +64,6 @@ if submitted:
     with col4:
         two_hundred_avg(ticker=st.session_state.ticket_selected)
 
-    with col5:
-        st.write(" ")
 
     if st.session_state.chart_type == "ONE DAY":
         one_day_plotly_plot(increase_c=candle_rise, decrease_c=candle_fall,
@@ -107,8 +107,6 @@ if submitted:
 
 else:
     st.image("https://images.pexels.com/photos/8369648/pexels-photo-8369648.jpeg", width=600)
-
-
 
 
 # Press the green button in the gutter to run the script.
