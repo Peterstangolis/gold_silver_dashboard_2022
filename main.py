@@ -31,10 +31,8 @@ with st.sidebar:
     with st.form(key="submit_selection"):
         st.selectbox("SELECT TICKER SYMBOL", list(commodities.values()), index=0, key="ticket_selected")
         submitted = st.form_submit_button(label="Submit")
+
     st.write(submitted)
-
-
-    st.write(st.session_state.ticket_selected)
 
 st.title(f"{st.session_state.ticket_selected}")
 
@@ -52,7 +50,8 @@ if submitted:
 
     with col1:
         updated_metric(ticker=st.session_state.ticket_selected, title_name=chart_colours_title[st.session_state.ticket_selected][0],
-                       line_color=chart_colours_title[st.session_state.ticket_selected][1])
+                       line_color=chart_colours_title[st.session_state.ticket_selected][1],
+                       fill_color=chart_colours_title[st.session_state.ticket_selected][2])
     with col2:
         fifty_two_high(ticker=st.session_state.ticket_selected)
 
@@ -73,7 +72,7 @@ if submitted:
         for i in range(len(headline_keys)):
             key = headline_keys[i]
             st.write(f"<p style = 'font-size:18px;font-family:liberation serif;color:black;'>{news[key][0]}</p>", unsafe_allow_html=True)
-            st.markdown(f"<span style = 'color:#0076A9;font-size:12px;'> {news[key][2]} </span> <span style = 'color:lightgrey;font-size:13px;'> | {news[key][4]} </span> ", unsafe_allow_html=True)
+            st.markdown(f"<span style = 'color:#0076A9;font-size:12px;'> {news[key][2]} </span> <span style = 'color:{chart_colours_title[st.session_state.ticket_selected][1]};font-size:13px;'> | {news[key][4]} </span> ", unsafe_allow_html=True)
             if len(news[key][3]) > 2:
                 #st.image(f'{headlines[key][3]}', width=100)
                 image_link = f"<a href='{news[key][1]}'><img src='{news[key][3]}' alt = 'article image' style = 'width:190px;height:120px; border: 2px solid lightgrey;border-radius:10px;'></a>"

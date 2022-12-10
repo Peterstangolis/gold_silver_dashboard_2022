@@ -20,7 +20,7 @@ import streamlit as st
 
 
 
-def updated_metric(ticker, title_name, line_color):
+def updated_metric(ticker, title_name, line_color, fill_color):
     #from functions.OneDayData import one_day_data
     import json
     with open(DATA_DIR) as file:
@@ -49,7 +49,7 @@ def updated_metric(ticker, title_name, line_color):
         y=data["Close"],
         line_color=line_color,
         line_width=0.8,
-        opacity=0.8,
+        opacity=0.9,
         hovertemplate= "%{x|%d %b, '%y %I%M%p}<br><b>%{y}<extra></extra>"
     ))
 
@@ -61,7 +61,7 @@ def updated_metric(ticker, title_name, line_color):
     #fig.write_html(f"data/{title_name}_metric_price.html")
 
     fig.update_layout(
-        plot_bgcolor="#FFF6E3",
+        plot_bgcolor=fill_color,
         paper_bgcolor = "#DCEEF2",
         title={
             "text": f"<span style='font-size:30px;color:{line_color};font-weight:bold;'>{title_name}</span><br>",#<span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>",

@@ -32,8 +32,8 @@ volume_silver = '#B4BEC9'
 fill_color_silver = '#F2F2F2'
 volume_gold =  '#A67926'
 fill_color_gold = 'rgba(255, 186, 59, 0.2)'
-volume_tsx = '#6986B3',
-fill_color_tsx = '#B0D0FF'
+volume_tsx = '#6986B3'
+fill_color_tsx = '#D9E8F5'
 
 # CHART COLOURS:
 chart_colours_title = {
