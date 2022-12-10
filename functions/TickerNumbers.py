@@ -18,7 +18,7 @@ def ticker_numbers(ticker):
 
     updated_numbers = {
         'fifty_two_HIGH' : fifty_two_HIGH,
-        "fifty_two_LOW:" : fifty_two_LOW,
+        "fifty_two_LOW" : fifty_two_LOW,
         "two_hundred_AVG" : two_hundred_AVG,
         "prev_CLOSE" : prev_CLOSE,
         "reg_MARKET" : reg_MARKET,

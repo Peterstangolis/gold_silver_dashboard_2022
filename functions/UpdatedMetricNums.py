@@ -7,7 +7,12 @@ from functions.OneDayData import one_day_data
 from variables import one_day_period, fiveMinute_interval, candle_fall, candle_rise
 from functions.TickerNumbers import ticker_numbers
 
+# Path Settings
+from pathlib import Path
 
+THIS_DIR = Path(__file__).parent if"__file___" in locals() else Path.cwd()
+print(THIS_DIR)
+DATA_DIR = THIS_DIR / "data/updated_numbers.json"
 
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -18,9 +23,9 @@ import streamlit as st
 def updated_metric(ticker, title_name, line_color):
     #from functions.OneDayData import one_day_data
     import json
-    with open('../data/updated_numbers.json') as file:
+    with open(DATA_DIR) as file:
         contents = file.read()
-
+    parsed_contents = json.loads(contents)
 
     lu, lp, data = one_day_data(period=one_day_period, interval=fiveMinute_interval, ticker=ticker)
 
@@ -32,11 +37,11 @@ def updated_metric(ticker, title_name, line_color):
 
     fig.add_trace(go.Indicator(
         mode="number+delta",
-        value=round(contents["reg_MARKET"], 3),
+        value= float(parsed_contents["reg_MARKET"]),
         number={"prefix": "$"},
         number_font=dict(size=70, color='#182033'),
-        delta={"reference": contents["prev_CLOSE"], "valueformat": ".3f", 'relative': False,
-               "suffix": f" ({contents['percent_change']:.2f}%)"},
+        delta={"reference": parsed_contents["prev_CLOSE"], "valueformat": ".3f", 'relative': False,
+               "suffix": f" ({parsed_contents['perc_change']:.2f}%)"},
         domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
@@ -83,17 +88,22 @@ def fifty_two_high(ticker):
     #fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
     #reg_MARKET, price_change, percent_change= ticker_numbers(ticker=ticker)
 
-    p_change = ((fifty_two_week_HIGH - previous_CLOSE)/fifty_two_week_HIGH)*100
+    import json
+    with open(DATA_DIR) as file:
+        contents = file.read()
+    parsed_contents = json.loads(contents)
+
+    p_change = ((parsed_contents['fifty_two_HIGH'] - parsed_contents['prev_CLOSE'])/parsed_contents['fifty_two_HIGH'])*100
 
 
     fig = go.Figure()
 
     fig.add_trace(go.Indicator(
         mode="number+delta",
-        value=fifty_two_week_HIGH,
+        value=parsed_contents['fifty_two_HIGH'],
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
-        delta={"reference": previous_CLOSE, "valueformat": ".2f", 'relative': True, 'position': 'top',
+        delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': True, 'position': 'top',
                "suffix": f"<br>({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
@@ -124,16 +134,22 @@ def fifty_two_low(ticker):
     #fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
     #reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
 
-    p_change = ((fifty_two_week_LOW - previous_CLOSE) / fifty_two_week_HIGH) * 100
+    import json
+    with open(DATA_DIR) as file:
+        contents = file.read()
+    parsed_contents = json.loads(contents)
+    print(parsed_contents)
+
+    p_change = ((parsed_contents['fifty_two_LOW'] - parsed_contents['prev_CLOSE']) / parsed_contents['fifty_two_LOW']) * 100
 
     fig = go.Figure()
 
     fig.add_trace(go.Indicator(
         mode="number+delta",
-        value=fifty_two_week_LOW,
+        value=parsed_contents['fifty_two_LOW'],
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
-        delta={"reference": previous_CLOSE, "valueformat": ".2f", 'relative': False,
+        delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': False,
                "suffix": f"<br> ({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
@@ -161,19 +177,24 @@ def fifty_two_low(ticker):
     st.plotly_chart(fig, use_container_width=True)
 
 def two_hundred_avg(ticker):
-    fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
-    reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
+    # fifty_two_week_HIGH, fifty_two_week_LOW, two_hundred_day_AVG, previous_CLOSE, \
+    # reg_MARKET, price_change, percent_change = ticker_numbers(ticker=ticker)
 
-    p_change = ((two_hundred_day_AVG - previous_CLOSE) / fifty_two_week_HIGH) * 100
+    import json
+    with open(DATA_DIR) as file:
+        contents = file.read()
+    parsed_contents = json.loads(contents)
+
+    p_change = ((parsed_contents['two_hundred_AVG'] - parsed_contents['prev_CLOSE']) / parsed_contents['prev_CLOSE']) * 100
 
     fig = go.Figure()
 
     fig.add_trace(go.Indicator(
         mode="number+delta",
-        value=two_hundred_day_AVG,
+        value=parsed_contents['two_hundred_AVG'],
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
-        delta={"reference": previous_CLOSE, "valueformat": ".2f", 'relative': False,
+        delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': False,
                "suffix": f"<br> ({p_change:.2f}%)"},
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
