@@ -34,7 +34,7 @@ with st.sidebar:
 
     st.write(submitted)
 
-st.title(f"{st.session_state.ticket_selected}")
+st.markdown(f"<span style='font-color:black;font-size:44px;font-family:arial;font-weight:bold;'>{chart_colours_title[st.session_state.ticket_selected][0]} STATS AND FIGURES </span><span style='font-color:{chart_colours_title[st.session_state.ticket_selected][1]};font-size:24px;font-style:italic;'>({st.session_state.ticket_selected})</span>", unsafe_allow_html=True)
 
 if submitted:
 
@@ -67,8 +67,9 @@ if submitted:
     with st.sidebar:
         news = news_headlines(ticker=st.session_state.ticket_selected)
         headline_keys = list(news.keys())
-        st.write("NEWS")
-        #st.write(news)
+        st.markdown("<hr>", unsafe_allow_html=True)
+        st.write(f"<span style = 'font-size:20px;font-family:liberation serif;color:{chart_colours_title[st.session_state.ticket_selected][1]}'>LATEST HEADLINES FOR {chart_colours_title[st.session_state.ticket_selected][0]}</span>", unsafe_allow_html=True)
+
         for i in range(len(headline_keys)):
             key = headline_keys[i]
             st.write(f"<p style = 'font-size:18px;font-family:liberation serif;color:black;'>{news[key][0]}</p>", unsafe_allow_html=True)

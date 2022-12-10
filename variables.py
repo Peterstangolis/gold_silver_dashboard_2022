@@ -28,7 +28,7 @@ one_day_interval = '1d'
 # COLORS:
 candle_rise = '#00B250'
 candle_fall = '#B21102'
-volume_silver = '#B4BEC9'
+volume_silver = '#83868E'
 fill_color_silver = '#F2F2F2'
 volume_gold =  '#A67926'
 fill_color_gold = 'rgba(255, 186, 59, 0.2)'

@@ -11,7 +11,7 @@ from functions.TickerNumbers import ticker_numbers
 from pathlib import Path
 
 THIS_DIR = Path(__file__).parent if"__file___" in locals() else Path.cwd()
-print(THIS_DIR)
+
 DATA_DIR = THIS_DIR / "data/updated_numbers.json"
 
 import plotly.graph_objects as go
@@ -134,7 +134,6 @@ def fifty_two_low(ticker):
     with open(DATA_DIR) as file:
         contents = file.read()
     parsed_contents = json.loads(contents)
-    print(parsed_contents)
 
     p_change = ((parsed_contents['fifty_two_LOW'] - parsed_contents['prev_CLOSE']) / parsed_contents['fifty_two_LOW']) * 100
 
