@@ -113,7 +113,7 @@ def fifty_two_high(ticker):
                 paper_bgcolor="#E5FFEE",
                 font_family='Overpass',
                 title={
-                    "text": "<span style='font-size:20px;color:#182033;'>52 WEEK HIGH</span><br>",
+                    "text": "<span style='font-size:20px;color:#182033;'>📈  52 WEEK HIGH</span><br>",
                     'y': 0.9,
                     'x': 0.5,
                     'xanchor': 'center',
@@ -161,7 +161,7 @@ def fifty_two_low(ticker):
         paper_bgcolor="#FFE1DE",
         font_family='Overpass',
         title={
-            "text": "<span style='font-size:20px;color:#182033;'>52 WEEK LOW</span><br>",
+            "text": "<span style='font-size:20px;color:#182033;'>📉  52 WEEK LOW</span><br>",
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
