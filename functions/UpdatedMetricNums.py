@@ -192,7 +192,8 @@ def two_hundred_avg(ticker):
         number={"prefix": "$"},
         number_font=dict(size=50, color='#182033'),
         delta={"reference": parsed_contents['prev_CLOSE'], "valueformat": ".2f", 'relative': False,
-               "suffix": f"({p_change:.2f}%)"},
+               #"suffix": f"({p_change:.2f}%)"
+               },
         # domain = {'x':[1, 1], 'y':[0.5,0]},
         delta_decreasing=dict(color=candle_fall),
         delta_increasing=dict(color=candle_rise),
