@@ -66,7 +66,7 @@ def updated_metric(ticker, title_name, line_color, fill_color):
         plot_bgcolor=fill_color,
         paper_bgcolor = "#DCEEF2",
         title={
-            "text": f"<span style='font-size:30px;color:{line_color};font-weight:bold;'>{title_name}</span><br>",#<span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>",
+            "text": f"<span style='font-size:35px;color:{line_color};font-weight:bold;'>{title_name}</span><br>",#<span style='font-size:18px;color:#4C5958;'>{updated_date:%a %b %#d, %Y %H:%M%p}</span>",
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
