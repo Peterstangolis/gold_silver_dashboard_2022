@@ -68,7 +68,8 @@ if submitted:
     if st.session_state.chart_type == "ONE DAY":
         one_day_plotly_plot(increase_c=candle_rise, decrease_c=candle_fall,
                             volume_c=chart_colours_title[st.session_state.ticket_selected][1], template_p=plotly_template,
-                            period=one_day_interval, interval=fifteenMinute_interval,
+                            period=two_day_period if datetime.datetime.today().weekday() == 6 else one_day_period,
+                            interval=fifteenMinute_interval,
                             ticker=st.session_state.ticket_selected)
 
     elif st.session_state.chart_type == "HISTORY":

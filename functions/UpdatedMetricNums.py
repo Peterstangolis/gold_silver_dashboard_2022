@@ -1,10 +1,10 @@
-
+import datetime
 
 ## A function that takes in a ticker along with the one day values for the ticker and returns a metric that incorporates
 ##  the latest price, the change in price from previousclose along with a line chart in the background
 
 from functions.OneDayData import one_day_data
-from variables import one_day_period, fiveMinute_interval, candle_fall, candle_rise
+from variables import one_day_period, fiveMinute_interval, candle_fall, candle_rise, two_day_period
 from functions.TickerNumbers import ticker_numbers
 
 # Path Settings
@@ -27,7 +27,9 @@ def updated_metric(ticker, title_name, line_color, fill_color):
         contents = file.read()
     parsed_contents = json.loads(contents)
 
-    lu, lp, data = one_day_data(period=one_day_period, interval=fiveMinute_interval, ticker=ticker)
+    #p = two_day_period if datetime.datetime.today().weekday() == 6 else one_day_period
+    lu, lp, data = one_day_data(period=two_day_period if datetime.datetime.today().weekday() == 6 else one_day_period,
+                                interval=fiveMinute_interval, ticker=ticker)
 
     fig = go.Figure()
 

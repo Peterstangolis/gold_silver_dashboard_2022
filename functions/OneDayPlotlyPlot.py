@@ -10,6 +10,7 @@ from plotly.subplots import make_subplots
 import streamlit as st
 
 def one_day_plotly_plot(increase_c, decrease_c, volume_c, template_p, period, interval, ticker):
+
     last_updated, last_price, one_day_prices = one_day_data(period=period, interval=interval, ticker=ticker)
 
     fig_ticker = make_subplots(rows=2, cols=1, shared_xaxes=True,vertical_spacing=0.01,row_heights=[0.7, 0.3])

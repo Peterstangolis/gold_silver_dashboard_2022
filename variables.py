@@ -19,6 +19,7 @@ commodities = {
 
 
 one_day_period = '1d'
+two_day_period = '2d'
 max_period = 'max'
 fifteenMinute_interval = '15m'
 fiveMinute_interval = '5m'
