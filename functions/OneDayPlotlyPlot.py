@@ -60,8 +60,9 @@ def one_day_plotly_plot(increase_c, decrease_c, volume_c, template_p, period, in
                                 hovertemplate="%{x},<br><b> %{y} <extra></extra>"
                                 ),
                          row=2, col=1)
-    fig.update_yaxes(title = "VOLUME",
-                     title_font_color = volume_c)
+    fig_ticker.update_yaxes(title = "VOLUME",
+                     title_font_color = volume_c,
+                     row=2, col=1)
 
     # Last Price
     fig_ticker.add_annotation(xref="paper",
