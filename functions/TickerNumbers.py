@@ -21,14 +21,36 @@ def ticker_numbers(ticker):
         two_hundred_AVG = float(i_string[i_string.find("twoHundredDayAverage"): (
                     i_string.find("twoHundredDayAverage") + two_hundred_AVG_length)].split(":")[1].strip().replace(",",
                                                                                                                    ""))
+        try:
+            two_hundred_AVG = two_hundred_AVG.replace("'", "")
+        except:
+            pass
+
         fifty_two_HIGH = float(i_string[i_string.find("fiftyTwoWeekHigh"): (
                     i_string.find("fiftyTwoWeekHigh") + fifty_two_HIGH_length)].split(":")[1].strip().replace(",", ""))
-        fifty_two_LOW = float(
-            i_string[i_string.find("fiftyTwoWeekLow"): (i_string.find("fiftyTwoWeekLow") + fifty_two_LOW_length)].split(
-                ":")[1].strip().replace(",", ""))
+        try:
+            fifty_two_HIGH = fifty_two_HIGH.replace("'", "")
+        except:
+            pass
 
-        prev_CLOSE = float(i_string[i_string.find("regularMarketPreviousClose"): (i_string.find("regularMarketPreviousClose") + regularMarketPreviousClose_length)].split(":")[1].strip().replace(",",""))
-        reg_MARKET = float(i_string[i_string.find("regularMarketPrice"): (i_string.find("regularMarketPrice") + regularMarketPrice_length)].split(":")[1].strip().replace(",",""))
+        fifty_two_LOW = i_string[i_string.find("fiftyTwoWeekLow"): (i_string.find("fiftyTwoWeekLow") + fifty_two_LOW_length)].split(
+                ":")[1].strip().replace(",", "")
+        try:
+            fifty_two_LOW = float(fifty_two_LOW.replace("'", ""))
+        except:
+            fifty_two_LOW = float(fifty_two_LOW)
+
+        prev_CLOSE = i_string[i_string.find("regularMarketPreviousClose"): (i_string.find("regularMarketPreviousClose") + regularMarketPreviousClose_length)].split(":")[1].strip().replace(",","")
+        try:
+            prev_CLOSE = float(prev_CLOSE.replace("'", ""))
+        except:
+            prev_CLOSE = float(prev_CLOSE)
+
+        reg_MARKET = i_string[i_string.find("regularMarketPrice"): (i_string.find("regularMarketPrice") + regularMarketPrice_length)].split(":")[1].strip().replace(",","")
+        try:
+            reg_MARKET = float(reg_MARKET.replace("'", ""))
+        except:
+            reg_MARKET = float(reg_MARKET)
 
     except:
         ticker_data = yf.Ticker(ticker)
